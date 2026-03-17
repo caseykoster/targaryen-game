@@ -74,8 +74,12 @@ function NodeBox({ node, solved, pointsEarned, flash, onClick }) {
 }
 
 export default function App() {
-  const [solved, setSolved] = useState({})   // id → true
-  const [earned, setEarned] = useState({})   // id → points awarded
+  const [solved, setSolved] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('tg_solved')) || {} } catch { return {} }
+  })
+  const [earned, setEarned] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('tg_earned')) || {} } catch { return {} }
+  })
   const [flashing, setFlashing] = useState({})
   const [activeNode, setActiveNode] = useState(null)
   const [hintLevel, setHintLevel] = useState(0) // 0=none, 1=epithet, 2=full
@@ -83,6 +87,9 @@ export default function App() {
   const [guess, setGuess] = useState('')
   const [wrong, setWrong] = useState(false)
   const inputRef = useRef(null)
+
+  useEffect(() => { localStorage.setItem('tg_solved', JSON.stringify(solved)) }, [solved])
+  useEffect(() => { localStorage.setItem('tg_earned', JSON.stringify(earned)) }, [earned])
 
   useEffect(() => {
     if (activeNode && inputRef.current) {
@@ -131,6 +138,8 @@ export default function App() {
   }
 
   function handleReset() {
+    localStorage.removeItem('tg_solved')
+    localStorage.removeItem('tg_earned')
     setSolved({})
     setEarned({})
     setFlashing({})
