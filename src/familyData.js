@@ -379,6 +379,8 @@ export const edges = [
   // Jaehaerys I + Alysanne → Baelon
   { from: 'jaehaerys1', to: 'baelon' },
   { from: 'alysanne',   to: 'baelon' },
+  // Rhaenys (QNW) → Laena Velaryon (her daughter; lateral arc below gen-5 row)
+  { from: 'rhaenys_qnw', to: 'laena', lateral: true },
   // Baelon → Viserys I + Daemon
   { from: 'baelon',     to: 'viserys1' },
   { from: 'baelon',     to: 'daemon' },

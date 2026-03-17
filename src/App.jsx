@@ -28,11 +28,17 @@ function EdgePath({ edge }) {
   const x2 = to.x
   const y2 = to.y - NODE_H / 2
 
-  // Secondary-parent edges route their control points down past the intervening
-  // generation row so the line swings below the siblings before landing.
+  // Lateral edges connect nodes on the same row; arc below them.
+  // Secondary edges swing down past the child's top to avoid crossing siblings.
+  // Skipped edges are plain dashed verticals (or near-verticals).
   let pathD
-  if (edge.secondary) {
-    const dropY = y2 + 26  // just below the child's top edge
+  if (edge.lateral) {
+    const by1 = from.y + NODE_H / 2
+    const by2 = to.y + NODE_H / 2
+    const dropY = Math.max(by1, by2) + 44
+    pathD = `M ${x1} ${by1} C ${x1} ${dropY}, ${x2} ${dropY}, ${x2} ${by2}`
+  } else if (edge.secondary) {
+    const dropY = y2 + 26
     pathD = `M ${x1} ${y1} C ${x1} ${dropY}, ${x2} ${dropY}, ${x2} ${y2}`
   } else {
     const midY = (y1 + y2) / 2
@@ -43,9 +49,9 @@ function EdgePath({ edge }) {
     <path
       d={pathD}
       fill="none"
-      stroke={edge.skipped ? '#554433' : edge.secondary ? '#6b4f8a' : '#7a5c2e'}
-      strokeWidth={edge.skipped || edge.secondary ? 1.5 : 2}
-      strokeDasharray={edge.skipped ? '8 5' : edge.secondary ? '5 3' : undefined}
+      stroke={edge.skipped ? '#554433' : (edge.secondary || edge.lateral) ? '#6b4f8a' : '#7a5c2e'}
+      strokeWidth={edge.skipped || edge.secondary || edge.lateral ? 1.5 : 2}
+      strokeDasharray={edge.skipped ? '8 5' : (edge.secondary || edge.lateral) ? '5 3' : undefined}
     />
   )
 }
