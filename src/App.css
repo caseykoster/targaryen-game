@@ -156,8 +156,8 @@
 }
 
 .node-rect.solved {
-  fill: #0d1f0d;
-  stroke: #3a7a3a;
+  fill: #1f0808;
+  stroke: #c0392b;
   stroke-width: 1.5;
 }
 
@@ -172,7 +172,7 @@
 }
 
 .node-name {
-  fill: #a8d8a8;
+  fill: #e8a090;
   font-size: 12.5px;
   font-family: 'Palatino Linotype', Palatino, serif;
   font-weight: bold;
