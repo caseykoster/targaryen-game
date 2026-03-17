@@ -156,9 +156,10 @@
 }
 
 .node-rect.solved {
-  fill: #1f0808;
-  stroke: #c0392b;
-  stroke-width: 1.5;
+  fill: #3a0e0e;
+  stroke: #e05040;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px rgba(224, 80, 64, 0.4));
 }
 
 .node-rect.flash {
