@@ -1,7 +1,7 @@
 export const NODE_W = 106;
 export const NODE_H = 42;
-export const SVG_W = 1040;
-export const SVG_H = 1570;
+export const SVG_W = 1300;
+export const SVG_H = 1760;
 
 export const nodes = [
   // ── Generation 1 ──────────────────────────────────────────
@@ -61,7 +61,7 @@ export const nodes = [
     id: 'alysanne',
     name: 'Alysanne',
     shortHint: 'Good Queen',
-    hint: 'Good Queen Alysanne; wife of Jaehaerys I; helped build the Night\'s Watch road',
+    hint: "Good Queen Alysanne; wife of Jaehaerys I; helped build the Night's Watch road",
     accepts: ['alysanne', 'queen alysanne'],
     x: 710, y: 310,
   },
@@ -83,7 +83,7 @@ export const nodes = [
     shortHint: 'Fifth King',
     hint: 'Fifth king; his choice of succession sparked the Dance of Dragons',
     accepts: ['viserys i', 'viserys 1', 'viserys'],
-    x: 370, y: 530,
+    x: 620, y: 530,
   },
   {
     id: 'daemon',
@@ -91,25 +91,25 @@ export const nodes = [
     shortHint: 'The Rogue Prince',
     hint: 'The Rogue Prince; brother of Viserys I; wielded Dark Sister; twice married',
     accepts: ['daemon', 'prince daemon', 'daemon targaryen'],
-    x: 640, y: 530,
+    x: 1020, y: 530,
   },
   {
     id: 'laena',
     name: 'Laena Velaryon',
     shortHint: "Daemon's 2nd wife",
-    hint: "Daughter of Corlys Velaryon (the Sea Snake); Daemon's second wife; rode Vhagar",
+    hint: "Daughter of Corlys Velaryon; Daemon's second wife; rode Vhagar",
     accepts: ['laena', 'laena velaryon'],
-    x: 870, y: 530,
+    x: 1160, y: 530,
   },
 
-  // ── Generation 6 ──────────────────────────────────────────
+  // ── Generation 6 — Viserys I's children + Daemon/Laena's children ──
   {
     id: 'rhaenyra',
     name: 'Rhaenyra',
     shortHint: "The Realm's Delight",
-    hint: "The Realm's Delight; daughter of Viserys I; queen during the Dance of Dragons",
+    hint: "The Realm's Delight; eldest child of Viserys I; queen during the Dance of Dragons; married Laenor Velaryon then Daemon",
     accepts: ['rhaenyra', 'queen rhaenyra', 'rhaenyra targaryen'],
-    x: 150, y: 640,
+    x: 320, y: 645,
   },
   {
     id: 'aegon2',
@@ -117,7 +117,31 @@ export const nodes = [
     shortHint: 'The Elder',
     hint: 'Sixth king; son of Viserys I & Alicent Hightower; rival to Rhaenyra in the Dance',
     accepts: ['aegon ii', 'aegon 2', 'aegon the elder', 'aegon'],
-    x: 530, y: 640,
+    x: 500, y: 645,
+  },
+  {
+    id: 'helaena',
+    name: 'Helaena',
+    shortHint: 'Queen Helaena',
+    hint: 'Daughter of Viserys I & Alicent Hightower; wed her brother Aegon II; a dreamer said to speak prophecy through riddles',
+    accepts: ['helaena', 'helaena targaryen'],
+    x: 660, y: 645,
+  },
+  {
+    id: 'aemond',
+    name: 'Aemond',
+    shortHint: 'One-Eye',
+    hint: 'Prince Aemond One-Eye; stole Vhagar after Laena died; lost his eye to Lucerys; killed at the Battle Above the Gods Eye',
+    accepts: ['aemond', 'aemond targaryen', 'prince aemond'],
+    x: 820, y: 645,
+  },
+  {
+    id: 'daeron_vi',
+    name: 'Daeron',
+    shortHint: 'Daeron the Younger',
+    hint: 'Daeron Targaryen; youngest son of Viserys I & Alicent; served under Lord Hightower in the Reach during the Dance',
+    accepts: ['daeron', 'daeron targaryen', 'daeron the younger'],
+    x: 960, y: 645,
   },
   {
     id: 'baela',
@@ -125,7 +149,7 @@ export const nodes = [
     shortHint: "Daemon's daughter",
     hint: 'Daughter of Daemon & Laena Velaryon; twin of Rhaena; rode Moondancer at the Battle of the Gullet',
     accepts: ['baela', 'baela targaryen'],
-    x: 730, y: 640,
+    x: 1090, y: 645,
   },
   {
     id: 'rhaena',
@@ -133,29 +157,93 @@ export const nodes = [
     shortHint: "Daemon's daughter",
     hint: "Daughter of Daemon & Laena Velaryon; twin of Baela; kept dragon eggs that never hatched",
     accepts: ['rhaena', 'rhaena targaryen'],
-    x: 900, y: 640,
+    x: 1220, y: 645,
   },
 
-  // ── Generation 7 ──────────────────────────────────────────
+  // ── Generation 7 — Rhaenyra's children ──────────────────
+  {
+    id: 'jacaerys',
+    name: 'Jacaerys',
+    shortHint: 'Jace',
+    hint: "Jacaerys Velaryon; Rhaenyra's eldest son by Laenor; rode Vermax; died at the Battle of the Gullet",
+    accepts: ['jacaerys', 'jace', 'jacaerys velaryon'],
+    x: 100, y: 775,
+  },
+  {
+    id: 'lucerys',
+    name: 'Lucerys',
+    shortHint: 'Luke',
+    hint: "Lucerys Velaryon; Rhaenyra's second son by Laenor; rode Arrax; killed by Aemond and Vhagar over Storm's End",
+    accepts: ['lucerys', 'luke', 'lucerys velaryon'],
+    x: 230, y: 775,
+  },
+  {
+    id: 'joffrey_v',
+    name: 'Joffrey',
+    shortHint: "Rhaenyra's third son",
+    hint: "Joffrey Velaryon; Rhaenyra's third son by Laenor; died during the Dragonpit riot trying to claim a dragon",
+    accepts: ['joffrey', 'joffrey velaryon'],
+    x: 360, y: 775,
+  },
   {
     id: 'aegon3',
     name: 'Aegon III',
     shortHint: 'The Dragonbane',
-    hint: 'Seventh king; son of Rhaenyra & Daemon; last dragon died during his reign',
+    hint: 'Seventh king; son of Rhaenyra & Daemon; witnessed his mother devoured by a dragon; last dragon died during his reign',
     accepts: ['aegon iii', 'aegon 3', 'aegon the dragonbane', 'aegon'],
-    x: 150, y: 750,
+    x: 510, y: 775,
+  },
+  {
+    id: 'viserys_y',
+    name: 'Viserys II',
+    shortHint: 'Viserys the Younger',
+    hint: 'Viserys II; son of Rhaenyra & Daemon; captured by Lys as a child; outlived Aegon III to become the 10th king',
+    accepts: ['viserys ii', 'viserys 2', 'viserys'],
+    x: 640, y: 775,
   },
 
-  // ── Skip ~7 kings ──────────────────────────────────────────
+  // ── Skip via Aegon IV to Daeron II ────────────────────────
 
-  // ── Maekar I ──────────────────────────────────────────────
+  // ── Daeron II & his sons ───────────────────────────────────
+  {
+    id: 'daeron2',
+    name: 'Daeron II',
+    shortHint: 'The Good',
+    hint: 'Twelfth king; son of Aegon IV; united Dorne with the Seven Kingdoms through marriage; father of Maekar I',
+    accepts: ['daeron ii', 'daeron 2', 'daeron the good', 'daeron'],
+    x: 540, y: 965,
+  },
+  {
+    id: 'baelor_b',
+    name: 'Baelor',
+    shortHint: 'Breakspear',
+    hint: 'Prince Baelor Breakspear; heir to Daeron II; died accidentally during trial-by-combat at the Ashford tourney',
+    accepts: ['baelor', 'baelor breakspear', 'prince baelor'],
+    x: 340, y: 1085,
+  },
+  {
+    id: 'aerys1',
+    name: 'Aerys I',
+    shortHint: 'The Bookish King',
+    hint: 'Thirteenth king; son of Daeron II; preferred sorcery and scrolls to ruling; had no children; preceded Maekar',
+    accepts: ['aerys i', 'aerys 1', 'aerys'],
+    x: 480, y: 1085,
+  },
+  {
+    id: 'rhaegel',
+    name: 'Rhaegel',
+    shortHint: 'Died Mad',
+    hint: 'Prince Rhaegel; son of Daeron II; died in a fit of madness; father of the twins Aelor and Aelora',
+    accepts: ['rhaegel', 'rhaegel targaryen'],
+    x: 620, y: 1085,
+  },
   {
     id: 'maekar',
     name: 'Maekar I',
     shortHint: 'The Anvil',
-    hint: 'Fourteenth king; the Anvil; son of Daeron II; died at the Peake Uprising',
+    hint: 'Fourteenth king; son of Daeron II; father of Maester Aemon and Aegon V (Egg); died at the Peake Uprising',
     accepts: ['maekar i', 'maekar 1', 'maekar the anvil', 'maekar'],
-    x: 370, y: 940,
+    x: 760, y: 1085,
   },
 
   // ── Maekar's children ─────────────────────────────────────
@@ -165,7 +253,7 @@ export const nodes = [
     shortHint: "Maekar's eldest",
     hint: "Maekar's eldest son; died young of a pox caught from a prostitute",
     accepts: ['daeron'],
-    x: 100, y: 1055,
+    x: 580, y: 1205,
   },
   {
     id: 'aerion',
@@ -173,7 +261,7 @@ export const nodes = [
     shortHint: 'Brightflame',
     hint: "Aerion Brightflame; Maekar's second son; drank wildfire believing it would transform him into a dragon",
     accepts: ['aerion', 'aerion brightflame', 'aerion targaryen'],
-    x: 265, y: 1055,
+    x: 710, y: 1205,
   },
   {
     id: 'aemon',
@@ -181,7 +269,7 @@ export const nodes = [
     shortHint: 'Maester Aemon',
     hint: "Maester Aemon of the Night's Watch; refused the crown twice; lived past 100; advised Jon Snow",
     accepts: ['aemon', 'maester aemon', 'aemon targaryen'],
-    x: 450, y: 1055,
+    x: 840, y: 1205,
   },
   {
     id: 'aegon5',
@@ -189,7 +277,7 @@ export const nodes = [
     shortHint: 'Egg',
     hint: "Aegon the Unlikely; known as Egg; squired for Ser Duncan the Tall; died at Summerhall trying to hatch dragons",
     accepts: ['aegon v', 'aegon 5', 'aegon the unlikely', 'egg', 'aegon'],
-    x: 650, y: 1055,
+    x: 970, y: 1205,
   },
 
   // ── Aegon V → Jaehaerys II ────────────────────────────────
@@ -197,9 +285,9 @@ export const nodes = [
     id: 'jaehaerys2',
     name: 'Jaehaerys II',
     shortHint: 'Sixteenth King',
-    hint: 'Sixteenth king; son of Aegon V; short but steady reign; father of the Mad King',
+    hint: 'Sixteenth king; son of Aegon V; short but steady reign; ended the last Blackfyre threat; father of the Mad King',
     accepts: ['jaehaerys ii', 'jaehaerys 2', 'jaehaerys'],
-    x: 550, y: 1165,
+    x: 880, y: 1325,
   },
 
   // ── Aerys II ──────────────────────────────────────────────
@@ -209,17 +297,17 @@ export const nodes = [
     shortHint: 'The Mad King',
     hint: 'Seventeenth king; the Mad King; burned lords with wildfire; killed by Jaime Lannister',
     accepts: ['aerys ii', 'aerys 2', 'aerys the mad', 'the mad king', 'aerys'],
-    x: 440, y: 1275,
+    x: 780, y: 1445,
   },
 
-  // ── Aerys's children ──────────────────────────────────────
+  // ── Aerys II's children ───────────────────────────────────
   {
     id: 'rhaegar',
     name: 'Rhaegar',
     shortHint: 'The Last Dragon',
     hint: 'Crown prince; the Last Dragon; carried off Lyanna Stark; slain by Robert Baratheon at the Trident',
     accepts: ['rhaegar', 'prince rhaegar', 'rhaegar targaryen'],
-    x: 210, y: 1385,
+    x: 550, y: 1560,
   },
   {
     id: 'viserys3',
@@ -227,7 +315,7 @@ export const nodes = [
     shortHint: 'The Beggar King',
     hint: "The Beggar King; sold Daenerys to Khal Drogo for an army; received a crown of molten gold",
     accepts: ['viserys iii', 'viserys 3', 'viserys targaryen', 'viserys'],
-    x: 440, y: 1385,
+    x: 780, y: 1560,
   },
   {
     id: 'daenerys',
@@ -235,7 +323,7 @@ export const nodes = [
     shortHint: 'Mother of Dragons',
     hint: 'Mother of Dragons; Breaker of Chains; hatched three dragon eggs; claimed the Iron Throne',
     accepts: ['daenerys', 'dany', 'daenerys targaryen', 'daenerys stormborn'],
-    x: 690, y: 1385,
+    x: 1010, y: 1560,
   },
 
   // ── Jon Snow ──────────────────────────────────────────────
@@ -245,7 +333,7 @@ export const nodes = [
     shortHint: 'The White Wolf',
     hint: "The White Wolf; true name Aegon Targaryen; son of Rhaegar & Lyanna Stark; Lord Commander of the Night's Watch",
     accepts: ['jon snow', 'jon', 'aegon targaryen', 'aegon'],
-    x: 210, y: 1495,
+    x: 550, y: 1675,
   },
 ];
 
@@ -264,20 +352,31 @@ export const edges = [
   // Baelon → Viserys I + Daemon
   { from: 'baelon',     to: 'viserys1' },
   { from: 'baelon',     to: 'daemon' },
-  // Viserys I → Rhaenyra + Aegon II
+  // Viserys I → his five children
   { from: 'viserys1',   to: 'rhaenyra' },
   { from: 'viserys1',   to: 'aegon2' },
+  { from: 'viserys1',   to: 'helaena' },
+  { from: 'viserys1',   to: 'aemond' },
+  { from: 'viserys1',   to: 'daeron_vi' },
   // Daemon + Laena → Baela + Rhaena
   { from: 'daemon',     to: 'baela' },
   { from: 'laena',      to: 'baela' },
   { from: 'daemon',     to: 'rhaena' },
   { from: 'laena',      to: 'rhaena' },
-  // Rhaenyra + Daemon → Aegon III
+  // Rhaenyra → all five children (Jace/Luke/Joffrey by Laenor; Aegon III/Viserys II by Daemon)
+  { from: 'rhaenyra',   to: 'jacaerys' },
+  { from: 'rhaenyra',   to: 'lucerys' },
+  { from: 'rhaenyra',   to: 'joffrey_v' },
   { from: 'rhaenyra',   to: 'aegon3' },
-  { from: 'daemon',     to: 'aegon3' },
-  // Aegon III ⟶ Maekar I (skip ~7 kings)
-  { from: 'aegon3',     to: 'maekar', skipped: true },
-  // Maekar I → children
+  { from: 'rhaenyra',   to: 'viserys_y' },
+  // Viserys II (son of Rhaenyra) ⟶ Daeron II (skip via Aegon IV)
+  { from: 'viserys_y',  to: 'daeron2', skipped: true },
+  // Daeron II → his four sons
+  { from: 'daeron2',    to: 'baelor_b' },
+  { from: 'daeron2',    to: 'aerys1' },
+  { from: 'daeron2',    to: 'rhaegel' },
+  { from: 'daeron2',    to: 'maekar' },
+  // Maekar I → his four sons
   { from: 'maekar',     to: 'daeron_m' },
   { from: 'maekar',     to: 'aerion' },
   { from: 'maekar',     to: 'aemon' },
