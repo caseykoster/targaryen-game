@@ -207,7 +207,7 @@ export default function App() {
             <EdgePath key={i} edge={edge} />
           ))}
 
-          <text x={330} y={847} textAnchor="middle" className="skip-label">
+          <text x={260} y={850} textAnchor="middle" className="skip-label">
             &#x2015; ~7 kings &#x2015;
           </text>
 

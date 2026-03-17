@@ -109,7 +109,7 @@ export const nodes = [
     shortHint: "The Realm's Delight",
     hint: "The Realm's Delight; daughter of Viserys I; queen during the Dance of Dragons",
     accepts: ['rhaenyra', 'queen rhaenyra', 'rhaenyra targaryen'],
-    x: 160, y: 640,
+    x: 150, y: 640,
   },
   {
     id: 'aegon2',
@@ -117,7 +117,7 @@ export const nodes = [
     shortHint: 'The Elder',
     hint: 'Sixth king; son of Viserys I & Alicent Hightower; rival to Rhaenyra in the Dance',
     accepts: ['aegon ii', 'aegon 2', 'aegon the elder', 'aegon'],
-    x: 430, y: 640,
+    x: 530, y: 640,
   },
   {
     id: 'baela',
@@ -143,7 +143,7 @@ export const nodes = [
     shortHint: 'The Dragonbane',
     hint: 'Seventh king; son of Rhaenyra & Daemon; last dragon died during his reign',
     accepts: ['aegon iii', 'aegon 3', 'aegon the dragonbane', 'aegon'],
-    x: 290, y: 750,
+    x: 150, y: 750,
   },
 
   // ── Skip ~7 kings ──────────────────────────────────────────
