@@ -18,7 +18,7 @@ export const nodes = [
     name: 'Aegon I',
     shortHint: 'The Conqueror',
     hint: 'First King of the Seven Kingdoms; rode Balerion the Black Dread',
-    accepts: ['aegon i', 'aegon 1', 'aegon the conqueror'],
+    accepts: ['aegon i', 'aegon 1', 'aegon the conqueror', 'aegon'],
     x: 380, y: 80,
   },
   {
@@ -82,7 +82,7 @@ export const nodes = [
     name: 'Viserys I',
     shortHint: 'Fifth King',
     hint: 'Fifth king; his choice of succession sparked the Dance of Dragons',
-    accepts: ['viserys i', 'viserys 1'],
+    accepts: ['viserys i', 'viserys 1', 'viserys'],
     x: 370, y: 530,
   },
   {
@@ -116,7 +116,7 @@ export const nodes = [
     name: 'Aegon II',
     shortHint: 'The Elder',
     hint: 'Sixth king; son of Viserys I & Alicent Hightower; rival to Rhaenyra in the Dance',
-    accepts: ['aegon ii', 'aegon 2', 'aegon the elder'],
+    accepts: ['aegon ii', 'aegon 2', 'aegon the elder', 'aegon'],
     x: 430, y: 640,
   },
   {
@@ -142,7 +142,7 @@ export const nodes = [
     name: 'Aegon III',
     shortHint: 'The Dragonbane',
     hint: 'Seventh king; son of Rhaenyra & Daemon; last dragon died during his reign',
-    accepts: ['aegon iii', 'aegon 3', 'aegon the dragonbane'],
+    accepts: ['aegon iii', 'aegon 3', 'aegon the dragonbane', 'aegon'],
     x: 290, y: 750,
   },
 
@@ -188,7 +188,7 @@ export const nodes = [
     name: 'Aegon V',
     shortHint: 'Egg',
     hint: "Aegon the Unlikely; known as Egg; squired for Ser Duncan the Tall; died at Summerhall trying to hatch dragons",
-    accepts: ['aegon v', 'aegon 5', 'aegon the unlikely', 'egg'],
+    accepts: ['aegon v', 'aegon 5', 'aegon the unlikely', 'egg', 'aegon'],
     x: 650, y: 1055,
   },
 
@@ -198,7 +198,7 @@ export const nodes = [
     name: 'Jaehaerys II',
     shortHint: 'Sixteenth King',
     hint: 'Sixteenth king; son of Aegon V; short but steady reign; father of the Mad King',
-    accepts: ['jaehaerys ii', 'jaehaerys 2'],
+    accepts: ['jaehaerys ii', 'jaehaerys 2', 'jaehaerys'],
     x: 550, y: 1165,
   },
 
@@ -226,7 +226,7 @@ export const nodes = [
     name: 'Viserys III',
     shortHint: 'The Beggar King',
     hint: "The Beggar King; sold Daenerys to Khal Drogo for an army; received a crown of molten gold",
-    accepts: ['viserys iii', 'viserys 3', 'viserys targaryen'],
+    accepts: ['viserys iii', 'viserys 3', 'viserys targaryen', 'viserys'],
     x: 440, y: 1385,
   },
   {
