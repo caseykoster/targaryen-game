@@ -416,6 +416,37 @@
   font-size: 0.85em;
 }
 
+/* ── Review mode ──────────────────────────────────────────── */
+.review-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.review-name {
+  font-size: 1.3rem;
+  color: #a8d8a8;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+}
+
+.review-score {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  color: #c8a84b;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+}
+
+.review-score .points-label {
+  letter-spacing: 0;
+}
+
+/* ────────────────────────────────────────────────────────── */
 .btn-reveal {
   display: block;
   width: 100%;

@@ -45,10 +45,10 @@ function NodeBox({ node, solved, pointsEarned, flash, onClick }) {
   return (
     <g
       transform={`translate(${node.x - NODE_W / 2}, ${node.y - NODE_H / 2})`}
-      onClick={() => !solved && onClick(node)}
-      style={{ cursor: solved ? 'default' : 'pointer' }}
-      role={solved ? undefined : 'button'}
-      aria-label={solved ? node.name : 'Click to guess'}
+      onClick={() => onClick(node)}
+      style={{ cursor: 'pointer' }}
+      role="button"
+      aria-label={solved ? `Review: ${node.name}` : 'Click to guess'}
     >
       <rect
         width={NODE_W}
@@ -229,59 +229,75 @@ export default function App() {
           <div className="modal" onClick={e => e.stopPropagation()}>
             <button className="modal-close" onClick={handleClose}>&#x2715;</button>
 
-            {/* Hint area */}
-            <div className="hint-area">
-              {nodeHintLevel === 0 && (
-                <button className="btn-hint" onClick={handleRevealHint}>
-                  Show Hint &nbsp;<span className="hint-cost">−1 pt</span>
-                </button>
-              )}
-              {nodeHintLevel >= 1 && (
+            {solved[activeNode.id] ? (
+              /* ── Review mode ── */
+              <div className="review-body">
+                <div className="review-name">{activeNode.name}</div>
                 <div className="hint-epithet">{activeNode.shortHint}</div>
-              )}
-              {nodeHintLevel === 1 && (
-                <button className="btn-hint btn-hint-secondary" onClick={handleRevealHint}>
-                  Show Full Clue &nbsp;<span className="hint-cost">−1 pt</span>
-                </button>
-              )}
-              {nodeHintLevel >= 2 && (
                 <div className="hint-full">{activeNode.hint}</div>
-              )}
-            </div>
-
-            {/* Points indicator */}
-            <div className="points-indicator">
-              {'★'.repeat(pendingPoints)}{'☆'.repeat(POINTS[0] - pendingPoints)}
-              <span className="points-label">{pendingPoints} pt{pendingPoints !== 1 ? 's' : ''} for correct answer</span>
-            </div>
-
-            <form onSubmit={handleGuessSubmit}>
-              <input
-                ref={inputRef}
-                type="text"
-                value={guess}
-                onChange={e => { setGuess(e.target.value); setWrong(false) }}
-                placeholder="Enter name…"
-                className={`guess-input ${wrong ? 'wrong' : ''}`}
-                autoComplete="off"
-                spellCheck="false"
-              />
-              <div className="modal-buttons">
-                <button type="submit" className="btn-submit">Guess</button>
-                <button type="button" className="btn-cancel" onClick={handleClose}>Skip</button>
+                {earned[activeNode.id] != null && (
+                  <div className="review-score">
+                    {'★'.repeat(earned[activeNode.id])}{'☆'.repeat(POINTS[0] - earned[activeNode.id])}
+                    <span className="points-label">{earned[activeNode.id]} pt{earned[activeNode.id] !== 1 ? 's' : ''} earned</span>
+                  </div>
+                )}
               </div>
-            </form>
+            ) : (
+              /* ── Guess mode ── */
+              <>
+                <div className="hint-area">
+                  {nodeHintLevel === 0 && (
+                    <button className="btn-hint" onClick={handleRevealHint}>
+                      Show Hint &nbsp;<span className="hint-cost">−1 pt</span>
+                    </button>
+                  )}
+                  {nodeHintLevel >= 1 && (
+                    <div className="hint-epithet">{activeNode.shortHint}</div>
+                  )}
+                  {nodeHintLevel === 1 && (
+                    <button className="btn-hint btn-hint-secondary" onClick={handleRevealHint}>
+                      Show Full Clue &nbsp;<span className="hint-cost">−1 pt</span>
+                    </button>
+                  )}
+                  {nodeHintLevel >= 2 && (
+                    <div className="hint-full">{activeNode.hint}</div>
+                  )}
+                </div>
 
-            {wrong && (
-              <div className="wrong-msg">
-                Not quite — try again! &nbsp;<span className="wrong-penalty">−1 pt</span>
-              </div>
-            )}
+                <div className="points-indicator">
+                  {'★'.repeat(pendingPoints)}{'☆'.repeat(POINTS[0] - pendingPoints)}
+                  <span className="points-label">{pendingPoints} pt{pendingPoints !== 1 ? 's' : ''} for correct answer</span>
+                </div>
 
-            {pendingPoints === 0 && (
-              <button className="btn-reveal" onClick={handleRevealAnswer}>
-                Reveal Answer
-              </button>
+                <form onSubmit={handleGuessSubmit}>
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={guess}
+                    onChange={e => { setGuess(e.target.value); setWrong(false) }}
+                    placeholder="Enter name…"
+                    className={`guess-input ${wrong ? 'wrong' : ''}`}
+                    autoComplete="off"
+                    spellCheck="false"
+                  />
+                  <div className="modal-buttons">
+                    <button type="submit" className="btn-submit">Guess</button>
+                    <button type="button" className="btn-cancel" onClick={handleClose}>Skip</button>
+                  </div>
+                </form>
+
+                {wrong && (
+                  <div className="wrong-msg">
+                    Not quite — try again! &nbsp;<span className="wrong-penalty">−1 pt</span>
+                  </div>
+                )}
+
+                {pendingPoints === 0 && (
+                  <button className="btn-reveal" onClick={handleRevealAnswer}>
+                    Reveal Answer
+                  </button>
+                )}
+              </>
             )}
           </div>
         </div>
