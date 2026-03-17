@@ -183,8 +183,8 @@ export default function App() {
             <EdgePath key={i} edge={edge} />
           ))}
 
-          <text x={400} y={1065} textAnchor="middle" className="skip-label">
-            &#x2015; ~10 generations &#x2015;
+          <text x={330} y={847} textAnchor="middle" className="skip-label">
+            &#x2015; ~7 kings &#x2015;
           </text>
 
           {nodes.map(node => (
