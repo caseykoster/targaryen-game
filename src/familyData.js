@@ -68,6 +68,22 @@ export const nodes = [
 
   // ── Generation 4 ──────────────────────────────────────────
   {
+    id: 'aemon_p',
+    name: 'Aemon',
+    shortHint: 'Prince Aemon',
+    hint: 'Prince Aemon Targaryen; eldest son of Jaehaerys I & Alysanne; died before his father; his daughter Rhaenys was passed over for the throne',
+    accepts: ['aemon', 'prince aemon', 'aemon targaryen'],
+    x: 150, y: 420,
+  },
+  {
+    id: 'jocelyn',
+    name: 'Jocelyn',
+    shortHint: 'Jocelyn Baratheon',
+    hint: "Jocelyn Baratheon; wife of Prince Aemon Targaryen; mother of Rhaenys 'The Queen Who Never Was'",
+    accepts: ['jocelyn', 'jocelyn baratheon'],
+    x: 295, y: 420,
+  },
+  {
     id: 'baelon',
     name: 'Baelon',
     shortHint: 'The Brave',
@@ -77,6 +93,14 @@ export const nodes = [
   },
 
   // ── Generation 5 ──────────────────────────────────────────
+  {
+    id: 'rhaenys_qnw',
+    name: 'Rhaenys',
+    shortHint: 'The Queen Who Never Was',
+    hint: "Daughter of Prince Aemon; passed over for the throne at the Great Council of 101 in favour of her cousin Viserys I; married Corlys Velaryon; died at Rook's Rest",
+    accepts: ['rhaenys', 'rhaenys targaryen', 'princess rhaenys', 'the queen who never was'],
+    x: 222, y: 530,
+  },
   {
     id: 'viserys1',
     name: 'Viserys I',
@@ -346,6 +370,12 @@ export const edges = [
   { from: 'rhaenys_q',  to: 'aenys' },
   // Aenys I → Jaehaerys I
   { from: 'aenys',      to: 'jaehaerys1' },
+  // Jaehaerys I + Alysanne → Prince Aemon
+  { from: 'jaehaerys1', to: 'aemon_p' },
+  { from: 'alysanne',   to: 'aemon_p' },
+  // Prince Aemon + Jocelyn → Rhaenys (The Queen Who Never Was)
+  { from: 'aemon_p',    to: 'rhaenys_qnw' },
+  { from: 'jocelyn',    to: 'rhaenys_qnw' },
   // Jaehaerys I + Alysanne → Baelon
   { from: 'jaehaerys1', to: 'baelon' },
   { from: 'alysanne',   to: 'baelon' },
