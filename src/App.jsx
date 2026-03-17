@@ -88,6 +88,7 @@ export default function App() {
   const [wrong, setWrong] = useState(false)
   const inputRef = useRef(null)
 
+  useEffect(() => { window.scrollTo(0, 0) }, [])
   useEffect(() => { localStorage.setItem('tg_solved', JSON.stringify(solved)) }, [solved])
   useEffect(() => { localStorage.setItem('tg_earned', JSON.stringify(earned)) }, [earned])
 
