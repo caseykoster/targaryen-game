@@ -2,8 +2,12 @@ import { useState, useRef, useEffect } from 'react'
 import { nodes, edges, NODE_W, NODE_H, SVG_W, SVG_H } from './familyData'
 import './App.css'
 
-const POINTS = [3, 2, 1] // hintLevel 0, 1, 2
+const POINTS = [3, 2, 1] // indexed by hintLevel 0, 1, 2
 const MAX_SCORE = nodes.length * POINTS[0]
+
+function load(key) {
+  try { return JSON.parse(localStorage.getItem(key)) || {} } catch { return {} }
+}
 
 function getNodeById(id) {
   return nodes.find(n => n.id === id)
@@ -74,40 +78,39 @@ function NodeBox({ node, solved, pointsEarned, flash, onClick }) {
 }
 
 export default function App() {
-  const [solved, setSolved] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('tg_solved')) || {} } catch { return {} }
-  })
-  const [earned, setEarned] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('tg_earned')) || {} } catch { return {} }
-  })
-  const [flashing, setFlashing] = useState({})
-  const [activeNode, setActiveNode] = useState(null)
-  const [hintLevel, setHintLevel] = useState(0) // 0=none, 1=epithet, 2=full
-  const [wrongCount, setWrongCount] = useState(0)
-  const [guess, setGuess] = useState('')
-  const [wrong, setWrong] = useState(false)
+  const [solved, setSolved]           = useState(() => load('tg_solved'))
+  const [earned, setEarned]           = useState(() => load('tg_earned'))
+  const [hintLevels, setHintLevels]   = useState(() => load('tg_hints'))   // nodeId → 0|1|2
+  const [wrongCounts, setWrongCounts] = useState(() => load('tg_wrongs'))  // nodeId → number
+  const [flashing, setFlashing]       = useState({})
+  const [activeNode, setActiveNode]   = useState(null)
+  const [guess, setGuess]             = useState('')
+  const [wrong, setWrong]             = useState(false)
   const inputRef = useRef(null)
 
   useEffect(() => { window.scrollTo(0, 0) }, [])
-  useEffect(() => { localStorage.setItem('tg_solved', JSON.stringify(solved)) }, [solved])
-  useEffect(() => { localStorage.setItem('tg_earned', JSON.stringify(earned)) }, [earned])
+  useEffect(() => { localStorage.setItem('tg_solved',  JSON.stringify(solved))      }, [solved])
+  useEffect(() => { localStorage.setItem('tg_earned',  JSON.stringify(earned))      }, [earned])
+  useEffect(() => { localStorage.setItem('tg_hints',   JSON.stringify(hintLevels))  }, [hintLevels])
+  useEffect(() => { localStorage.setItem('tg_wrongs',  JSON.stringify(wrongCounts)) }, [wrongCounts])
 
   useEffect(() => {
-    if (activeNode && inputRef.current) {
-      inputRef.current.focus()
-    }
+    if (activeNode && inputRef.current) inputRef.current.focus()
   }, [activeNode])
+
+  const nodeHintLevel  = activeNode ? (hintLevels[activeNode.id]  || 0) : 0
+  const nodeWrongCount = activeNode ? (wrongCounts[activeNode.id] || 0) : 0
+  const pendingPoints  = activeNode ? Math.max(0, POINTS[nodeHintLevel] - nodeWrongCount) : null
 
   function handleNodeClick(node) {
     setActiveNode(node)
-    setHintLevel(0)
-    setWrongCount(0)
     setGuess('')
     setWrong(false)
   }
 
   function handleRevealHint() {
-    setHintLevel(h => Math.min(h + 1, 2))
+    const next = Math.min((hintLevels[activeNode.id] || 0) + 1, 2)
+    setHintLevels(h => ({ ...h, [activeNode.id]: next }))
     inputRef.current?.focus()
   }
 
@@ -116,7 +119,7 @@ export default function App() {
     if (!activeNode) return
 
     if (checkGuess(activeNode, guess)) {
-      const pts = Math.max(0, POINTS[hintLevel] - wrongCount)
+      const pts = Math.max(0, POINTS[nodeHintLevel] - nodeWrongCount)
       setSolved(s => ({ ...s, [activeNode.id]: true }))
       setEarned(e => ({ ...e, [activeNode.id]: pts }))
       setFlashing(f => ({ ...f, [activeNode.id]: true }))
@@ -125,7 +128,7 @@ export default function App() {
       setGuess('')
       setWrong(false)
     } else {
-      setWrongCount(c => c + 1)
+      setWrongCounts(c => ({ ...c, [activeNode.id]: (c[activeNode.id] || 0) + 1 }))
       setWrong(true)
       inputRef.current?.select()
     }
@@ -135,28 +138,24 @@ export default function App() {
     setActiveNode(null)
     setGuess('')
     setWrong(false)
-    setWrongCount(0)
   }
 
   function handleReset() {
-    localStorage.removeItem('tg_solved')
-    localStorage.removeItem('tg_earned')
+    ['tg_solved', 'tg_earned', 'tg_hints', 'tg_wrongs'].forEach(k => localStorage.removeItem(k))
     setSolved({})
     setEarned({})
+    setHintLevels({})
+    setWrongCounts({})
     setFlashing({})
     setActiveNode(null)
-    setHintLevel(0)
-    setWrongCount(0)
     setGuess('')
     setWrong(false)
   }
 
   const solvedCount = Object.values(solved).filter(Boolean).length
-  const totalCount = nodes.length
-  const score = Object.values(earned).reduce((a, b) => a + b, 0)
-  const allSolved = solvedCount === totalCount
-
-  const pendingPoints = activeNode ? Math.max(0, POINTS[hintLevel] - wrongCount) : null
+  const totalCount  = nodes.length
+  const score       = Object.values(earned).reduce((a, b) => a + b, 0)
+  const allSolved   = solvedCount === totalCount
 
   return (
     <div className="app">
@@ -222,20 +221,20 @@ export default function App() {
 
             {/* Hint area */}
             <div className="hint-area">
-              {hintLevel === 0 && (
+              {nodeHintLevel === 0 && (
                 <button className="btn-hint" onClick={handleRevealHint}>
                   Show Hint &nbsp;<span className="hint-cost">−1 pt</span>
                 </button>
               )}
-              {hintLevel >= 1 && (
+              {nodeHintLevel >= 1 && (
                 <div className="hint-epithet">{activeNode.shortHint}</div>
               )}
-              {hintLevel === 1 && (
+              {nodeHintLevel === 1 && (
                 <button className="btn-hint btn-hint-secondary" onClick={handleRevealHint}>
                   Show Full Clue &nbsp;<span className="hint-cost">−1 pt</span>
                 </button>
               )}
-              {hintLevel >= 2 && (
+              {nodeHintLevel >= 2 && (
                 <div className="hint-full">{activeNode.hint}</div>
               )}
             </div>
