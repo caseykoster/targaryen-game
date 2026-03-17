@@ -27,16 +27,25 @@ function EdgePath({ edge }) {
   const y1 = from.y + NODE_H / 2
   const x2 = to.x
   const y2 = to.y - NODE_H / 2
-  const midY = (y1 + y2) / 2
-  const pathD = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`
+
+  // Secondary-parent edges route their control points down past the intervening
+  // generation row so the line swings below the siblings before landing.
+  let pathD
+  if (edge.secondary) {
+    const dropY = y2 + 26  // just below the child's top edge
+    pathD = `M ${x1} ${y1} C ${x1} ${dropY}, ${x2} ${dropY}, ${x2} ${y2}`
+  } else {
+    const midY = (y1 + y2) / 2
+    pathD = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`
+  }
 
   return (
     <path
       d={pathD}
       fill="none"
-      stroke={edge.skipped ? '#554433' : '#7a5c2e'}
-      strokeWidth={edge.skipped ? 1.5 : 2}
-      strokeDasharray={edge.skipped ? '8 5' : undefined}
+      stroke={edge.skipped ? '#554433' : edge.secondary ? '#6b4f8a' : '#7a5c2e'}
+      strokeWidth={edge.skipped || edge.secondary ? 1.5 : 2}
+      strokeDasharray={edge.skipped ? '8 5' : edge.secondary ? '5 3' : undefined}
     />
   )
 }

@@ -369,6 +369,9 @@ export const edges = [
   { from: 'rhaenyra',   to: 'joffrey_v' },
   { from: 'rhaenyra',   to: 'aegon3' },
   { from: 'rhaenyra',   to: 'viserys_y' },
+  // Daemon also parent of Aegon III and Viserys II (secondary lines, dashed purple)
+  { from: 'daemon',     to: 'aegon3',   secondary: true },
+  { from: 'daemon',     to: 'viserys_y', secondary: true },
   // Viserys II (son of Rhaenyra) ⟶ Daeron II (skip via Aegon IV)
   { from: 'viserys_y',  to: 'daeron2', skipped: true },
   // Daeron II → his four sons
