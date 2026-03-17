@@ -79,6 +79,7 @@ export default function App() {
   const [flashing, setFlashing] = useState({})
   const [activeNode, setActiveNode] = useState(null)
   const [hintLevel, setHintLevel] = useState(0) // 0=none, 1=epithet, 2=full
+  const [wrongCount, setWrongCount] = useState(0)
   const [guess, setGuess] = useState('')
   const [wrong, setWrong] = useState(false)
   const inputRef = useRef(null)
@@ -92,6 +93,7 @@ export default function App() {
   function handleNodeClick(node) {
     setActiveNode(node)
     setHintLevel(0)
+    setWrongCount(0)
     setGuess('')
     setWrong(false)
   }
@@ -106,7 +108,7 @@ export default function App() {
     if (!activeNode) return
 
     if (checkGuess(activeNode, guess)) {
-      const pts = POINTS[hintLevel]
+      const pts = Math.max(0, POINTS[hintLevel] - wrongCount)
       setSolved(s => ({ ...s, [activeNode.id]: true }))
       setEarned(e => ({ ...e, [activeNode.id]: pts }))
       setFlashing(f => ({ ...f, [activeNode.id]: true }))
@@ -115,6 +117,7 @@ export default function App() {
       setGuess('')
       setWrong(false)
     } else {
+      setWrongCount(c => c + 1)
       setWrong(true)
       inputRef.current?.select()
     }
@@ -124,6 +127,7 @@ export default function App() {
     setActiveNode(null)
     setGuess('')
     setWrong(false)
+    setWrongCount(0)
   }
 
   function handleReset() {
@@ -132,6 +136,7 @@ export default function App() {
     setFlashing({})
     setActiveNode(null)
     setHintLevel(0)
+    setWrongCount(0)
     setGuess('')
     setWrong(false)
   }
@@ -141,7 +146,7 @@ export default function App() {
   const score = Object.values(earned).reduce((a, b) => a + b, 0)
   const allSolved = solvedCount === totalCount
 
-  const pendingPoints = activeNode ? POINTS[hintLevel] : null
+  const pendingPoints = activeNode ? Math.max(0, POINTS[hintLevel] - wrongCount) : null
 
   return (
     <div className="app">
@@ -248,7 +253,11 @@ export default function App() {
               </div>
             </form>
 
-            {wrong && <div className="wrong-msg">Not quite — try again!</div>}
+            {wrong && (
+              <div className="wrong-msg">
+                Not quite — try again! &nbsp;<span className="wrong-penalty">−1 pt</span>
+              </div>
+            )}
           </div>
         </div>
       )}

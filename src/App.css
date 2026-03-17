@@ -408,3 +408,10 @@
   font-size: 0.88rem;
   font-style: italic;
 }
+
+.wrong-penalty {
+  color: #ff7777;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85em;
+}
