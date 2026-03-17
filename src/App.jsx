@@ -134,6 +134,16 @@ export default function App() {
     }
   }
 
+  function handleRevealAnswer() {
+    setSolved(s => ({ ...s, [activeNode.id]: true }))
+    setEarned(e => ({ ...e, [activeNode.id]: 0 }))
+    setFlashing(f => ({ ...f, [activeNode.id]: true }))
+    setTimeout(() => setFlashing(f => ({ ...f, [activeNode.id]: false })), 600)
+    setActiveNode(null)
+    setGuess('')
+    setWrong(false)
+  }
+
   function handleClose() {
     setActiveNode(null)
     setGuess('')
@@ -266,6 +276,12 @@ export default function App() {
               <div className="wrong-msg">
                 Not quite — try again! &nbsp;<span className="wrong-penalty">−1 pt</span>
               </div>
+            )}
+
+            {pendingPoints === 0 && (
+              <button className="btn-reveal" onClick={handleRevealAnswer}>
+                Reveal Answer
+              </button>
             )}
           </div>
         </div>

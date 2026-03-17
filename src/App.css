@@ -415,3 +415,24 @@
   font-weight: bold;
   font-size: 0.85em;
 }
+
+.btn-reveal {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  background: transparent;
+  border: 1px dashed #5a3030;
+  border-radius: 5px;
+  color: #7a5040;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-style: italic;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-reveal:hover {
+  border-color: #9a4040;
+  color: #c8a84b;
+}
